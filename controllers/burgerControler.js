@@ -16,24 +16,24 @@ router.get("/", function (req, res) {
     });
 });
 
-router.post("/api/cats", function (req, res) {
-    cat.create([
-        "name", "sleepy"
+router.post("/api/burgers", function (req, res) {
+    burger.create([
+        "name", "eaten"
     ], [
-        req.body.name, req.body.sleepy
+        req.body.name, req.body.eaten
     ], function (result) {
-        // Send back the ID of the new quote
+        // Send back the ID of the new burger
         res.json({ id: result.insertId });
     });
 });
 
-router.put("/api/cats/:id", function (req, res) {
+router.put("/api/burger/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
     console.log("condition", condition);
 
-    cat.update({
-        sleepy: req.body.sleepy
+    burger.update({
+        eaten: req.body.eaten
     }, condition, function (result) {
         if (result.changedRows == 0) {
             // If no rows were changed, then the ID must not exist, so 404
@@ -44,10 +44,10 @@ router.put("/api/cats/:id", function (req, res) {
     });
 });
 
-router.delete("/api/cats/:id", function (req, res) {
+router.delete("/api/burger/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
-    cat.delete(condition, function (result) {
+    burger.delete(condition, function (result) {
         if (result.affectedRows == 0) {
             // If no rows were changed, then the ID must not exist, so 404
             return res.status(404).end();
