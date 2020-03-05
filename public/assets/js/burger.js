@@ -1,8 +1,10 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function () {
   $(".change-eaten").on("click", function (event) {
+    event.preventDefault()
     var id = $(this).data("id");
-    var newBurger = $(this).data("newEaten");
+    var newBurger = $(this).data("neweaten");
+    console.log(newBurger)
 
     var newBurgerState = {
       eaten: newBurger
@@ -31,7 +33,7 @@ $(function () {
     };
 
     // Send the POST request.
-    $.ajax("/api/burger", {
+    $.ajax("/api/burgers", {
       type: "POST",
       data: newBurger
     }).then(
@@ -43,7 +45,7 @@ $(function () {
     );
   });
 
-  $(".delete-cat").on("click", function (event) {
+  $(".delete-burger").on("click", function (event) {
     var id = $(this).data("id");
 
     // Send the DELETE request.
